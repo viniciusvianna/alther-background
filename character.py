@@ -2,10 +2,10 @@ from action import Action
 from attribute import Attribute
 
 # Esta é a classe base que representa o personagem, sendo assim deve conter:
-# Info básica que não envolve métodos: nome, raça, origem, escola, aspiração, altura, peso, idade e idiomas
-# Info básica que envolve métodos: nível, xp, pd, pv, am, ap, moeda
-# Atributos: corpo, mente, foco, espírito, social e natureza
-# Ações do personagem: acerto, esquiva, defesa, resistência e artes
+# Info básica que não envolve métodos: nome, raça, origem, escola, aspiração, altura, peso, idade e idiomas (v)
+# Info básica que envolve métodos: nível, xp, pd, pv, am, ap, moeda (v)
+# Atributos: corpo, mente, foco, espírito, social e natureza (v)
+# Ações do personagem: acerto, esquiva, defesa, resistência e artes (v)
 # Equipamentos: mão direita, mão esquerda, tronco
 # Efeitos: mão direita, mão esquerda, tronco, cabeça, pés, acessório
 # Caminhos: ativos e não ativos, pc
@@ -36,7 +36,8 @@ class Character:
                  valors=0,
                  ruubis=0,
                  attributes=None,
-                 actions=None):
+                 actions=None,
+                 equips=None):
         if languages is None:
             languages = ["Medio"]
 
@@ -54,6 +55,11 @@ class Character:
                           "spirit": Attribute("Spirit", 5),
                           "social": Attribute("Social", 10),
                           "nature": Attribute("Nature", 5)}
+
+        if equips is None:
+            equips = {"Hand1": None,
+                      "Hand2": None,
+                      "Body": None}
 
         self.name = name
         self.race = race
@@ -86,6 +92,7 @@ class Character:
         self.ruubis = ruubis
         self.attributes = attributes
         self.actions = actions
+        self.equips = equips
 
     def __str__(self):
         return self.name
@@ -99,3 +106,10 @@ class Character:
         print("Actions")
         for action in self.actions.values():
             print(action)
+
+    def attack(self, hand):
+        result = 0
+        if self.equips[hand] is None:
+            result = self.attributes["body"].total_value / 4  # Ataque sem arma tem dano fixo de C4
+        else:
+            result = self.equips[hand].roll_attack()

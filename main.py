@@ -3,7 +3,8 @@ from dice import Dice
 
 
 def main():
-    char = Character("Raeniel")
+    lang = ["Medio", "Nuu"]
+    char = Character("Raeniel", "Rae", "Valiant", "Desbravadores do Vazio", "Ofensor", 1.82, 80, 50, languages=lang)
     char.actions["hit"].add_dice(Dice(1, 20))
     char.actions["hit"].add_dice(Dice(4, 6))
     char.actions["hit"].show_all_dice()
