@@ -1,13 +1,15 @@
-from action import Action
-from attribute import Attribute
+from model.action import Action
+from model.attribute import Attribute
+from model.weapon import Weapon
+from model.race import Race
 
 # Esta é a classe base que representa o personagem, sendo assim deve conter:
 # Info básica que não envolve métodos: nome, raça, origem, escola, aspiração, altura, peso, idade e idiomas (v)
 # Info básica que envolve métodos: nível, xp, pd, pv, am, ap, moeda (v)
 # Atributos: corpo, mente, foco, espírito, social e natureza (v)
 # Ações do personagem: acerto, esquiva, defesa, resistência e artes (v)
-# Equipamentos: mão direita, mão esquerda, tronco
-# Efeitos: mão direita, mão esquerda, tronco, cabeça, pés, acessório
+# Equipamentos: mão direita, mão esquerda, tronco (v)
+# Efeitos: mão direita, mão esquerda, tronco, cabeça, pés, acessório (v)
 # Caminhos: ativos e não ativos, pc
 # Habilidades: intrínseca, padrão (x4), suporte (x2), movimento, reação e perfeita
 # Inventário e Anotações
@@ -17,7 +19,7 @@ from attribute import Attribute
 class Character:
 
     def __init__(self, name: str,
-                 race: str,
+                 race: Race,
                  origin: str,
                  school: str,
                  aspiration: str,
@@ -37,7 +39,7 @@ class Character:
                  ruubis=0,
                  attributes=None,
                  actions=None,
-                 equips=None):
+                 effects=None):
         if languages is None:
             languages = ["Medio"]
 
@@ -56,10 +58,13 @@ class Character:
                           "social": Attribute("Social", 10),
                           "nature": Attribute("Nature", 5)}
 
-        if equips is None:
-            equips = {"Hand1": None,
-                      "Hand2": None,
-                      "Body": None}
+        if effects is None:
+            effects = {"Hand1": None,
+                       "Hand2": None,
+                       "Body": None,
+                       "Head": None,
+                       "Feet": None,
+                       "Accessory": None}
 
         self.name = name
         self.race = race
@@ -92,7 +97,8 @@ class Character:
         self.ruubis = ruubis
         self.attributes = attributes
         self.actions = actions
-        self.equips = equips
+        self.effects = effects
+        self.equips = {"Hand1": None, "Hand2": None, "Body": None}
 
     def __str__(self):
         return self.name
@@ -107,9 +113,18 @@ class Character:
         for action in self.actions.values():
             print(action)
 
+    def equip_weapon(self, weapon: Weapon, slot: str):
+        attr = weapon.damage.attr
+        for attribute in self.attributes.keys():
+            if attr.name.lower() == attribute:
+                weapon.damage.attr = self.attributes[attribute]
+
+        self.equips[slot] = weapon
+
     def attack(self, hand):
-        result = 0
         if self.equips[hand] is None:
             result = self.attributes["body"].total_value / 4  # Ataque sem arma tem dano fixo de C4
         else:
-            result = self.equips[hand].roll_attack()
+            result = self.equips[hand].damage.roll_damage()
+
+        return result

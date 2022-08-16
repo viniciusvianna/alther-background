@@ -1,6 +1,6 @@
 class Attribute:
 
-    def __init__(self, name: str, total_value: int, current_value: int = -1, training_level: int = 0):
+    def __init__(self, name: str, total_value: int = 0, current_value: int = -1, training_level: int = 0):
         self.name = name
         self.notation = name[0].upper()
         self.total_value = total_value

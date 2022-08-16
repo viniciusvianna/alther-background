@@ -1,4 +1,4 @@
-from dice import Dice
+from model.dice import Dice
 
 
 # Action é um conjunto de dados que representam a capacidade do personagem de executar aquela ação
