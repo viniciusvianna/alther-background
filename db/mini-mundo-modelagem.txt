@@ -1,0 +1,22 @@
+Mini-mundo alther battleground:
+
+A entidade principal é o personagem que possui nome, raça, origem, aspiração, altura, peso, idade, escola, nível, xp atual,
+xp total, pd, valores, ruubis, ações de movimento, ações padrão, atributos, equipamentos, dados de ação, caminhos e habilidades.
+Um personagem pode ter mais de um caminho, cada um com seu nível, PD total, PD atual e habilidades aprendidas. Além disso ele
+pode equipar qualquer uma de suas habilidades aprendidas a qualquer momento, exceto a intrínseca de cada caminho, que é automática.
+
+Cada raça possui uma habilidade e uma restrição racial. 
+
+Cada uma das três aspirações dá a possibilidade de seus 12 caminhos (tier 1, 2 e 3).
+
+São seis atributos, em três esferas: corpo e mente, foco e espírito, social e natureza. Cada um deve conter valor total, atual,
+temporário e nível de treinamento. Os atributos estão sempre ligados a um personagem.
+
+Os dados de ação podem ser d4, d6, d8, d10, d12 e d20 para as ações: acerto, esquiva, defesa, resistência e artes. Também estão
+sempre ligadas a um personagem.
+
+Os caminhos estão ligados a uma aspiração e possuem um conjunto de habilidades. No entanto, nem todas as habilidades ficarão disponíveis
+para os personagens, que precisam comprá-las para ter acesso. Além disso, as habilidades intrínsecas de cada caminho são equipadas
+automaticamente enquanto aquele caminho estiver ativo.
+
+
