@@ -1,5 +1,5 @@
-from model.dice import Dice
-from model.attribute import Attribute
+from model.basic.struc.dice import Dice
+from model.basic.struc.attribute import Attribute
 
 
 class Damage:
@@ -41,5 +41,8 @@ class Damage:
             result += self.bonus
 
         return result
+
+    def equip(self, char_attr: Attribute):
+        self.attr = char_attr
 
 
