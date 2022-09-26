@@ -1,7 +1,7 @@
-from model.action import Action
-from model.attribute import Attribute
-from model.weapon import Weapon
-from model.race import Race
+from model.basic.struc.action import Action
+from model.basic.definition.weapon import Weapon
+from model.basic.definition.race import Race
+
 
 # Esta é a classe base que representa o personagem, sendo assim deve conter:
 # Info básica que não envolve métodos: nome, raça, origem, escola, aspiração, altura, peso, idade e idiomas (v)
@@ -14,6 +14,7 @@ from model.race import Race
 # Habilidades: intrínseca, padrão (x4), suporte (x2), movimento, reação e perfeita
 # Inventário e Anotações
 # Companheiro Animal
+from model.character.charattributes import CharAttributes
 
 
 class Character:
@@ -35,8 +36,7 @@ class Character:
                  current_pv=-1,
                  am=1,
                  ap=1,
-                 valors=0,
-                 ruubis=0,
+                 coin="",
                  attributes=None,
                  actions=None,
                  effects=None):
@@ -51,12 +51,7 @@ class Character:
                        "arts": Action("Arts")}
 
         if attributes is None:
-            attributes = {"body": Attribute("Body", 10),
-                          "mind": Attribute("Mind", 5),
-                          "focus": Attribute("Focus", 10),
-                          "spirit": Attribute("Spirit", 5),
-                          "social": Attribute("Social", 10),
-                          "nature": Attribute("Nature", 5)}
+            attributes = CharAttributes()
 
         if effects is None:
             effects = {"Hand1": None,
@@ -93,8 +88,7 @@ class Character:
 
         self.am = am
         self.ap = ap
-        self.valors = valors
-        self.ruubis = ruubis
+        self.coin = coin
         self.attributes = attributes
         self.actions = actions
         self.effects = effects
@@ -104,9 +98,7 @@ class Character:
         return self.name
 
     def show_attributes(self):
-        print("Attributes")
-        for attribute in self.attributes.values():
-            print(attribute)
+        print(self.attributes)
 
     def show_actions(self):
         print("Actions")
@@ -115,15 +107,12 @@ class Character:
 
     def equip_weapon(self, weapon: Weapon, slot: str):
         attr = weapon.damage.attr
-        for attribute in self.attributes.keys():
-            if attr.name.lower() == attribute:
-                weapon.damage.attr = self.attributes[attribute]
-
+        weapon.damage.equip(self.attributes.match_attribute(attr))
         self.equips[slot] = weapon
 
     def attack(self, hand):
         if self.equips[hand] is None:
-            result = self.attributes["body"].total_value / 4  # Ataque sem arma tem dano fixo de C4
+            result = self.attributes.body.total_value / 4  # Ataque sem arma tem dano fixo de C4
         else:
             result = self.equips[hand].damage.roll_damage()
 

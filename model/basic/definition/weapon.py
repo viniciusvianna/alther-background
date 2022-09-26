@@ -1,4 +1,4 @@
-from model.damage import Damage
+from model.basic.struc.damage import Damage
 
 
 class Weapon:
@@ -24,3 +24,4 @@ class Weapon:
 
     def __str__(self):
         return f"{self.name}({self.category}) Dano: {self.damage}"
+
