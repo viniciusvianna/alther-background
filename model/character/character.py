@@ -14,6 +14,7 @@ from model.basic.definition.race import Race
 # Habilidades: intrínseca, padrão (x4), suporte (x2), movimento, reação e perfeita
 # Inventário e Anotações
 # Companheiro Animal
+from model.character.charactions import CharActions
 from model.character.charattributes import CharAttributes
 from model.character.charequipments import CharEquipments
 
@@ -47,11 +48,7 @@ class Character:
             languages = ["Medio"]
 
         if actions is None:
-            actions = {"hit": Action("Hit"),
-                       "evade": Action("Evade"),
-                       "defend": Action("Defend"),
-                       "resist": Action("Resist"),
-                       "arts": Action("Arts")}
+            actions = CharActions()
 
         if attributes is None:
             attributes = CharAttributes()
@@ -99,19 +96,24 @@ class Character:
         print(self.attributes)
 
     def show_actions(self):
-        print("Actions")
-        for action in self.actions.values():
-            print(action)
+        print(self.actions)
+
+    def show_equipments(self):
+        print(self.equips)
 
     def equip_weapon(self, weapon: Weapon, slot: str):
         attr = weapon.damage.attr
-        weapon.damage.equip(self.attributes.match_attribute(attr))
+        weapon.equip(self.attributes.match_attribute(attr))
         self.equips.equip(weapon, slot)
 
     def attack(self, hand):
-        if self.equips.get_hand(hand) is None:
-            result = self.attributes.body.total_value / 4  # Ataque sem arma tem dano fixo de C4
+        equipment = self.equips.get_equipment(hand)
+        if isinstance(equipment, Weapon):
+            result = equipment.roll_damage()
         else:
-            result = self.equips.get_hand(hand).damage.roll_damage()
+            result = self.attributes.body.total_value / 4  # Ataque sem arma tem dano fixo de C4
 
         return result
+
+    def act(self, action_name):
+        self.actions.perform_action(action_name)

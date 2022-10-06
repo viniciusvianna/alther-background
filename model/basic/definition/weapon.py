@@ -25,3 +25,9 @@ class Weapon(Equipment):
     def damage(self):
         return self._damage
 
+    def roll_damage(self):
+        return self._damage.roll_damage()
+
+    def equip(self, char_attr):
+        self._damage.equip(char_attr)
+

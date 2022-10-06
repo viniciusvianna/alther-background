@@ -11,9 +11,8 @@ def main():
     lang = ["Medio", "Nuu"]
     race = Race("Rae", "", "")
     char = Character(1, "Raeniel", race, "Valiant", "Desbravadores do Vazio", "Ofensor", 1.82, 80, 50, languages=lang)
-    char.actions["hit"].add_dice(Dice(1, 20))
-    char.actions["hit"].add_dice(Dice(4, 6))
-    char.actions["hit"].show_all_dice()
+    char.actions.add_dice_to_action('Acertar',Dice(1, 20))
+    char.actions.add_dice_to_action('Acertar', Dice(4, 6))
     body = Attribute("Corpo", 12)
     char.attributes.change_attribute(body)
     print()
@@ -21,7 +20,7 @@ def main():
     print()
     char.show_actions()
     print()
-    print(f"{char.name} rolled {char.actions['hit'].roll_action()} for {char.actions['hit'].name}")
+    print(f"{char.name} rolled {char.actions.perform_action('Acertar')} for Hit")
     weapon = Weapon("ADGCMN", "Adaga Comum", "Laminas Curtas", damage=Damage(Dice(1, 6), Attribute("Corpo"), 1 / 4),
                     bonus=Bonus("Hit", Dice(1, 4)))
     char.equip_weapon(weapon, "hand1")

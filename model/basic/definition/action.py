@@ -21,7 +21,7 @@ class Action:
         self.all_dice = all_dice
 
     def __str__(self):
-        return f"{self.name}\n{self.show_all_dice()}"
+        return f"{self.name} {self.show_all_dice()}"
 
     def roll_action(self):
         result = 0

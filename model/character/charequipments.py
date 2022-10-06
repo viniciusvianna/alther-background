@@ -35,13 +35,25 @@ class CharEquipments:
         self._feet = feet
         self._extra = extra
 
-    def get_hand(self, hand):
-        if hand == 'hand1':
+    def __str__(self):
+        return f"Equipments\n Hand 1:{self._hand1}\n Hand 2: {self._hand2}\n Body: {self._body}\n " \
+               f"Head: {self._head}\n Feet: {self._feet}\n Extra: {self._extra}\n"
+
+    def get_equipment(self, slot):
+        if slot == 'hand1':
             return self._hand1
-        elif hand == 'hand2':
+        elif slot == 'hand2':
             return self._hand2
+        elif slot == 'body':
+            return self._body
+        elif slot == 'head':
+            return self._head
+        elif slot == 'feet':
+            return self._feet
+        elif slot == 'extra':
+            return self._extra
         else:
-            raise ValueError("No hand")
+            raise ValueError(WRONG_SLOT)
 
     def equip(self, new_equipment, slot=None):
         if slot is None:
