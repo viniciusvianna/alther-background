@@ -28,5 +28,16 @@ class Dice:
     def __str__(self):
         return f"{self.quantity}d{self.sides}"  # Imprime o dado no formato padrão
 
+    def __add__(self, other):
+        if self._sides == other.sides:
+            sum = self._quantity + other.quantity
+            return Dice(sum, self._sides)
+        else:
+            raise ValueError("Você não pode somar dados de categorias diferentes")
+
     def roll(self):
         return self.quantity * rdr(1, self.sides + 1)  # O dado deve ser capaz de se rolar
+
+    def category(self):
+        return f"d{self._sides}"
+

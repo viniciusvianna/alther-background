@@ -1,9 +1,12 @@
+from model.basic.struc.dice import Dice
+
+
 class Bonus:
 
-    def __init__(self, place, dice):
+    def __init__(self, action: str, dice: Dice):
         self.dice = dice
-        self.place = place
+        self.action = action
 
     def __str__(self):
-        return self.dice + self.place
+        return self.dice + self.action
 

@@ -1,3 +1,4 @@
+from model.basic.struc.bonus import Bonus
 from model.basic.struc.dice import Dice
 
 
@@ -18,6 +19,9 @@ class Action:
                         'd20': Dice(0, 20)}
         self.name = name
         self.all_dice = all_dice
+
+    def __str__(self):
+        return f"{self.name}\n{self.show_all_dice()}"
 
     def roll_action(self):
         result = 0
@@ -40,5 +44,8 @@ class Action:
     def remove_dice(self, dice: Dice):
         self.all_dice[f'd{dice.sides}'].quantity -= dice.quantity
 
-    def __str__(self):
-        return f"{self.name}\n{self.show_all_dice()}"
+    def apply_bonus(self, bonus: Bonus):
+        if bonus.action == self.name:
+            self.all_dice[bonus.dice.category()] += bonus.dice
+            return True
+        return False
