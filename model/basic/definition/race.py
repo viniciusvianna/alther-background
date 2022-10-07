@@ -4,3 +4,6 @@ class Race:
         self.name = name
         self.racial_ability = racial_ability
         self.racial_restriction = racial_restriction
+
+    def __str__(self):
+        return self.name

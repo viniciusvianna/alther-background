@@ -38,6 +38,7 @@ class Character:
                  pd=0,
                  total_pv=0,
                  current_pv=-1,
+                 temp_pv=0,
                  am=1,
                  ap=1,
                  coin="",
@@ -77,6 +78,7 @@ class Character:
 
         self.pd = pd
         self.total_pv = total_pv
+        self.temp_pv = temp_pv
 
         if current_pv < 0:
             self.current_pv = total_pv
