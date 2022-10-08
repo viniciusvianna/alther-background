@@ -91,9 +91,7 @@ def parse_character_json(details, id_character):
     # Skills information
     skills = [create_skill(dic) for dic in det['habilidades_adquiridas']]
     equipped_skills = {slot: value for slot, value in det['habilidades_equipadas'].items() if value != ""}
-    char_skills = CharSkills(skills)
-    for skill in equipped_skills.items():
-        char_skills.equip_skill(skill[0], skill[1])
+    char_skills = CharSkills(skills, **equipped_skills)
 
     # Create character
     char = Character(

@@ -114,3 +114,68 @@ def get_all_skills():
 
     return [parser.parse_skill(response) for response in r]
 
+
+def get_skill_by_id(skill_id):
+    query = "SELECT * FROM habilidades WHERE id_habilidade = %s"
+    val = (skill_id,)
+
+    connection = open_connection()
+    cursor = create_cursor(connection)
+
+    cursor.execute(query, val)
+
+    r = cursor.fetchone()
+
+    close_connection(cursor, connection)
+
+    return parser.parse_skill(r)
+
+
+def get_skills_by_category(category):
+    query = "SELECT * FROM habilidades WHERE categoria = %s"
+    val = (category,)
+
+    connection = open_connection()
+    cursor = create_cursor(connection)
+
+    cursor.execute(query, val)
+
+    r = cursor.fetchall()
+
+    close_connection(cursor, connection)
+
+    return [parser.parse_skill(response) for response in r]
+
+
+def get_skills_by_path(path):
+    query = "SELECT * FROM habilidades WHERE id_caminho = %s"
+    val = (path,)
+
+    connection = open_connection()
+    cursor = create_cursor(connection)
+
+    cursor.execute(query, val)
+
+    r = cursor.fetchall()
+
+    close_connection(cursor, connection)
+
+    return [parser.parse_skill(response) for response in r]
+
+
+def upload_new_skill(skill):
+    query = "INSERT INTO habilidades (id_habilidade, id_caminho, nome_habilidade, categoria, descricao, custo)" \
+            " VALUES (%s, %s, %s, %s, %s, %s)"
+    val = tuple(skill)
+
+    connection = open_connection()
+    cursor = create_cursor(connection)
+
+    cursor.execute(query, val)
+
+    connection.commit()
+    close_connection(cursor, connection)
+
+    print("Habilidade adicionada.")
+
+
