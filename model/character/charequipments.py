@@ -1,9 +1,8 @@
-from model.basic.definition.accessory import Accessory
 from model.basic.definition.armor import Armor
 from model.basic.definition.equipment import Equipment
 from model.basic.definition.weapon import Weapon
 
-WRONG_SLOT = "Você não pode equipar este esquipamento no slot pedido"
+WRONG_SLOT = "This equipment cannot be in this slot"
 
 
 class CharEquipments:
@@ -11,77 +10,71 @@ class CharEquipments:
     def __init__(self,
                  hand1: Equipment = None,
                  hand2: Equipment = None,
-                 body: Equipment = None,
-                 head: Equipment = None,
-                 feet: Equipment = None,
-                 extra: Equipment = None):
-        if hand1 is None:
-            hand1 = Equipment('000000', "", "")
-        if hand2 is None:
-            hand2 = Equipment('000000', "", "")
-        if body is None:
-            body = Equipment('000000', "", "")
-        if head is None:
-            head = Equipment('000000', "", "")
-        if feet is None:
-            feet = Equipment('000000', "", "")
-        if extra is None:
-            extra = Equipment('000000', "", "")
+                 body: Equipment = None
+                 ):
 
-        self._hand1 = hand1
-        self._hand2 = hand2
-        self._body = body
-        self._head = head
-        self._feet = feet
-        self._extra = extra
+        if hand1 is None:
+            hand1 = ""
+        if hand2 is None:
+            hand2 = ""
+        if body is None:
+            body = ""
+
+        self._equipments = {'hand1': hand1, 'hand2': hand2, 'body': body}
 
     def __str__(self):
-        return f"Equipments\n Hand 1:{self._hand1}\n Hand 2: {self._hand2}\n Body: {self._body}\n " \
-               f"Head: {self._head}\n Feet: {self._feet}\n Extra: {self._extra}\n"
+        result = f"Equipments:\n"
+        for equipment in self._equipments.items():
+            result += f"{equipment[0]}: {equipment[1]}\n"
+        return result
 
-    def get_equipment(self, slot):
-        if slot == 'hand1':
-            return self._hand1
-        elif slot == 'hand2':
-            return self._hand2
-        elif slot == 'body':
-            return self._body
-        elif slot == 'head':
-            return self._head
-        elif slot == 'feet':
-            return self._feet
-        elif slot == 'extra':
-            return self._extra
+    @property
+    def hand1(self):
+        return self._equipments['hand1']
+
+    @hand1.setter
+    def hand1(self, value):
+        if isinstance(value, Weapon):
+            self._equipments['hand1'] = value
         else:
             raise ValueError(WRONG_SLOT)
 
-    def equip(self, new_equipment, slot=None):
-        if slot is None:
-            if new_equipment.slot == "head":
-                self._head = new_equipment
-            elif new_equipment.slot == "feet":
-                self._feet = new_equipment
-            elif new_equipment.slot == "extra":
-                self._extra = new_equipment
+    @property
+    def hand2(self):
+        return self._equipments['hand2']
+
+    @hand2.setter
+    def hand2(self, value):
+        if isinstance(value, Weapon):
+            self._equipments['hand2'] = value
+        else:
+            raise ValueError(WRONG_SLOT)
+
+    @property
+    def body(self):
+        return self._equipments['body']
+
+    @body.setter
+    def body(self, value):
+        if isinstance(value, Armor):
+            self._equipments['body'] = value
+        else:
+            raise ValueError(WRONG_SLOT)
+
+    def equip(self, new_equipment, slot):
+        if isinstance(new_equipment, Weapon):
+            if slot == 'hand1' or slot == 'hand2':
+                self._equipments[slot] = new_equipment
+            else:
+                raise ValueError(WRONG_SLOT)
+        elif isinstance(new_equipment, Armor):
+            if slot == 'body':
+                self._equipments['body'] = new_equipment
             else:
                 raise ValueError(WRONG_SLOT)
         else:
-            if isinstance(new_equipment, Weapon):
-                if slot == "hand1":
-                    self._hand1 = new_equipment
-                elif slot == "hand2":
-                    self._hand2 = new_equipment
-                else:
-                    raise ValueError(WRONG_SLOT)
-            elif isinstance((new_equipment, Armor)):
-                if slot == "body":
-                    self._body = new_equipment
-                elif slot == "hand1":
-                    self._hand1 = new_equipment
-                elif slot == "hand2":
-                    self._hand2 = new_equipment
-                else:
-                    raise ValueError(WRONG_SLOT)
-            else:
-                raise ValueError("Falha no equipamento")
+            raise ValueError('Invalid equipment')
+
+    def unequip(self, slot):
+        self._equipments[slot] = ""
 

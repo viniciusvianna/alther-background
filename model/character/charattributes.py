@@ -26,69 +26,63 @@ class CharAttributes:
         if nature is None:
             nature = Attribute("Natureza")
 
-        self._body = body
-        self._mind = mind
-        self._focus = focus
-        self._spirit = spirit
-        self._social = social
-        self._nature = nature
+        self._attributes = {'body': body, 'mind': mind, 'focus': focus, 'spirit': spirit, 'social': social, 'nature': nature}
 
     def __str__(self):
-        return f"Attributes\n {self._body}\n {self._mind}\n {self._focus}\n {self._spirit}\n {self._social}\n {self._nature}\n"
+        result = f"Attributes:\n"
+        for attribute in self._attributes.items():
+            result += f"{attribute[1]}\n"
+        return result
 
     @property
     def body(self):
-        return self._body
+        return self._attributes['body']
+
+    @body.setter
+    def body(self, new):
+        self._attributes['body'] = new
 
     @property
     def mind(self):
-        return self._mind
+        return self._attributes['mind']
+
+    @mind.setter
+    def mind(self, new):
+        self._attributes['mind'] = new
 
     @property
     def focus(self):
-        return self._focus
+        return self._attributes['focus']
+
+    @focus.setter
+    def focus(self, new):
+        self._attributes['focus'] = new
 
     @property
     def spirit(self):
-        return self._spirit
+        return self._attributes['spirit']
+
+    @spirit.setter
+    def spirit(self, new):
+        self._attributes['spirit'] = new
 
     @property
     def social(self):
-        return self._social
+        return self._attributes['social']
+
+    @social.setter
+    def social(self, new):
+        self._attributes['social'] = new
 
     @property
     def nature(self):
-        return self._nature
+        return self._attributes['nature']
 
-    def match_attribute(self, attr: Attribute):
-        if attr == self._body:
-            return self._body
-        elif attr == self._mind:
-            return self._mind
-        elif attr == self._focus:
-            return self._focus
-        elif attr == self._spirit:
-            return self._spirit
-        elif attr == self.social:
-            return self._social
-        elif attr == self._nature:
-            return self._nature
-        else:
-            raise ValueError("Não existe este atributo para o personagem")
+    @nature.setter
+    def nature(self, new):
+        self._attributes['nature'] = new
 
-    def change_attribute(self, attr: Attribute):
-        if attr == self._body:
-            self._body = attr
-        elif attr == self._mind:
-            self._mind = attr
-        elif attr == self._focus:
-            self._focus = attr
-        elif attr == self._spirit:
-            self._spirit = attr
-        elif attr == self.social:
-            self._social = attr
-        elif attr == self._nature:
-            self._nature = attr
-        else:
-            raise ValueError("Não existe este atributo para o personagem")
-
+    def match_attribute(self, attribute: Attribute):
+        for attr in self._attributes:
+            if attr == attribute:
+                return attr

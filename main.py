@@ -2,8 +2,9 @@ import control.mydatabase as db
 
 
 def main():
-    char = db.get_character_by_id(3)
-    print(char, char.name, char.race, char.height, char.actions, char.attributes)
+    skills = db.get_all_skills()
+    for skill in skills:
+        print(skill, skill.cost, 'PC')
 
 
 if __name__ == '__main__':

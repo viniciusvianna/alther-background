@@ -110,7 +110,7 @@ class Attribute:
 
         return False
 
-    def untrain(self):
+    def detrain(self):
         if self._training_level > 0:
             self._training_level -= 1
             return True

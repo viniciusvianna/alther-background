@@ -1,4 +1,4 @@
-from model.basic.definition.action import Action
+from model.basic.definition.path import Path
 from model.basic.definition.weapon import Weapon
 from model.basic.definition.race import Race
 
@@ -14,9 +14,12 @@ from model.basic.definition.race import Race
 # Habilidades: intrínseca, padrão (x4), suporte (x2), movimento, reação e perfeita
 # Inventário e Anotações
 # Companheiro Animal
+from model.character.characcessories import CharAccessories
 from model.character.charactions import CharActions
 from model.character.charattributes import CharAttributes
 from model.character.charequipments import CharEquipments
+from model.character.charpaths import CharPaths
+from model.character.charskills import CharSkills
 
 
 class Character:
@@ -41,10 +44,18 @@ class Character:
                  temp_pv=0,
                  am=1,
                  ap=1,
-                 coin="",
+                 coin=None,
                  attributes=None,
                  actions=None,
-                 equips=None):
+                 equips=None,
+                 accessories=None,
+                 paths=None,
+                 skills=None,
+                 inventory=None,
+                 notes=None):
+        if coin is None:
+            coin = ""
+
         if languages is None:
             languages = ["Medio"]
 
@@ -56,6 +67,38 @@ class Character:
 
         if equips is None:
             equips = CharEquipments()
+
+        if accessories is None:
+            accessories = CharAccessories()
+
+        if paths is None:
+            if aspiration == "Ofensor":
+                monk = Path('MON', 'Monge')
+                nebule = Path('NEB', 'Nébulo')
+                arcante = Path('ARC', 'Arcante')
+                shepian = Path('SHE', 'Shepian')
+                paths = CharPaths([monk, nebule, arcante, shepian])
+            elif aspiration == "Defensor":
+                crusade = Path('CRU', 'Cruzado')
+                druid = Path('DRU', 'Druida')
+                bard = Path('BAR', 'Bardo')
+                paladin = Path('PAL', 'Paladin')
+                paths = CharPaths([crusade, druid, bard, paladin])
+            elif aspiration == "Controlador":
+                aquile = Path('AQU', 'Áquila')
+                valete = Path('VAL', 'Valete')
+                ilusionist = Path('ILU', 'Ilusionista')
+                tecnoclast = Path('TEC', 'Tecnoclasta')
+                paths = CharPaths([aquile, valete, ilusionist, tecnoclast])
+
+        if skills is None:
+            skills = CharSkills([])
+
+        if inventory is None:
+            inventory = ""
+
+        if notes is None:
+            notes = ""
 
         self._id_character = id_character
         self.name = name
@@ -90,6 +133,11 @@ class Character:
         self.coin = coin
         self.attributes = attributes
         self.actions = actions
+        self.accessories = accessories
+        self.paths = paths
+        self.skills = skills
+        self.inventory = inventory
+        self.notes = notes
 
     def __str__(self):
         return self.name

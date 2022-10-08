@@ -4,7 +4,7 @@ from model.basic.struc.damage import Damage
 
 class Weapon(Equipment):
 
-    def __init__(self, id_equipment, name, category, description="", effect="",
+    def __init__(self, id_equipment, name, category=None, description=None, effect=None,
                  damage: Damage = None,
                  bonus=None):
 
@@ -15,7 +15,7 @@ class Weapon(Equipment):
         self._damage = damage
 
         if bonus is None:
-            bonus = []
+            bonus = {}
         self._bonus = bonus
 
     def __str__(self):

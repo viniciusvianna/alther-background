@@ -20,41 +20,36 @@ class CharActions:
         if channel is None:
             channel = Action("Canalizar")
 
-        self._hit = hit
-        self._evade = evade
-        self._defend = defend
-        self._resist = resist
-        self._channel = channel
+        self._actions = {'hit': hit, 'evade': evade, 'defend': defend, 'resist': resist, 'channel': channel}
 
     def __str__(self):
-        return f"Actions\n {self._hit}\n {self._evade}\n {self._defend}\n {self._resist}\n {self._channel}\n"
+        result = f"Actions:\n"
+        for action in self._actions.items():
+            result += f"{action[1]}\n"
+        return result
 
-    def perform_action(self, action_name):
-        if action_name == 'Acertar':
-            action = self._hit
-        elif action_name == 'Esquivar':
-            action = self._evade
-        elif action_name == 'Defender':
-            action = self._defend
-        elif action_name == 'Resistir':
-            action = self._resist
-        elif action_name == 'Canalizar':
-            action = self._channel
-        else:
-            raise ValueError("No such action")
+    @property
+    def hit(self):
+        return self._actions['hit']
 
-        return action.roll_action()
+    @property
+    def evade(self):
+        return self._actions['evade']
 
-    def add_dice_to_action(self, action_name, dice):
-        if action_name == 'Acertar':
-            self._hit.add_dice(dice)
-        elif action_name == 'Esquivar':
-            self._evade.add_dice(dice)
-        elif action_name == 'Defender':
-            self._defend.add_dice(dice)
-        elif action_name == 'Resistir':
-            self._resist.add_dice(dice)
-        elif action_name == 'Canalizar':
-            self._channel.add_dice(dice)
-        else:
-            raise ValueError("No such action")
+    @property
+    def defend(self):
+        return self._actions['defend']
+
+    @property
+    def resist(self):
+        return self._actions['resist']
+
+    @property
+    def channel(self):
+        return self._actions['channel']
+
+    def perform_action(self, action_type):
+        return self._actions[action_type].roll_action()
+
+    def add_dice_to_action(self, action_type, dice):
+        self._actions[action_type].add_dice(dice)
