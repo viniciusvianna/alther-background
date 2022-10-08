@@ -1,5 +1,5 @@
 import mysql.connector
-import control.parser as parser
+import model.connection.parser as parser
 
 config = {
     'user': 'root',

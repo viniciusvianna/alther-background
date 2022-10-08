@@ -37,3 +37,11 @@ class Skill:
 
     def __eq__(self, other):
         return self._id_skill == other.id_skill
+
+    def __iter__(self):
+        yield self._id_skill
+        yield self._id_path
+        yield self._name_skill
+        yield self._category
+        yield self._description
+        yield self._cost
