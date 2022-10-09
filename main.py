@@ -1,10 +1,8 @@
-import control.mydatabase as db
+import control.navigation as nav
 
 
 def main():
-    skills = db.get_all_skills()
-    for skill in skills:
-        print(skill, skill.cost, 'PC')
+    nav.app.run(debug=True)
 
 
 if __name__ == '__main__':

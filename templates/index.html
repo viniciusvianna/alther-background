@@ -1,27 +1,6 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/reset.css">
-    <link rel="stylesheet" href="../static/style.css">
-    <title>Alther Battleground</title>
-</head>
-<body>
-    <header class="h-main">
-        <div class="h-box">
-            <img class="h-logo" src="../static/img/alther-alther.png" alt="Alther escrito em Original">
-            <nav>
-                <ul class="nav-m-main">
-                    <li><a href="">Home</a></li>
-                    <li><a href="">Personagens</a></li>
-                    <li><a href="">Habilidades</a></li>
-                    <li><a href="">Equipamentos</a></li>
-                    <li><a href="">Caminhos</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-</body>
-</html>
+{% extends "template.html" %}
+{% block content %}
+    <main>
+        <h1 class="h-welcome">Bem-vindo</h1>
+    </main>
+{% endblock %}
