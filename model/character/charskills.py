@@ -11,7 +11,7 @@ class CharSkills:
                  main4: Skill = None,
                  sup1: Skill = None,
                  sup2: Skill = None,
-                 movement: Skill = None,
+                 mov: Skill = None,
                  reaction: Skill = None,
                  perfect: Skill = None):
         if intrinsic is None:
@@ -28,17 +28,27 @@ class CharSkills:
             sup1 = ""
         if sup2 is None:
             sup2 = ""
-        if movement is None:
-            movement = ""
+        if mov is None:
+            mov = ""
         if reaction is None:
             reaction = ""
         if perfect is None:
             perfect = ""
 
         self._available_skills = available_skills
-        self._equipped_skills = {'intrinseca': intrinsic, 'padrao1': main1, 'padrao2': main2, 'padrao3': main3, 'padrao4': main4,
-                                 'suporte1': sup1, 'suporte2': sup2, 'movimento': movement, 'reacao': reaction,
-                                 'perfeita': perfect}
+        self._equipped_skills = {'intrinsic': "", 'main1': "", 'main2': "", 'main3': "", 'main4': "",
+                                 'sup1': "", 'sup2': "", 'mov': "", 'reaction': "",
+                                 'perfect': ""}
+        self.equip_skill('intrinsic', intrinsic)
+        self.equip_skill('main1', main1)
+        self.equip_skill('main2', main2)
+        self.equip_skill('main3', main3)
+        self.equip_skill('main4', main4)
+        self.equip_skill('sup1', sup1)
+        self.equip_skill('sup2', sup2)
+        self.equip_skill('mov', mov)
+        self.equip_skill('reaction', reaction)
+        self.equip_skill('perfect', perfect)
 
     def __str__(self):
         result = f"Skills:\n"
@@ -56,43 +66,43 @@ class CharSkills:
 
     @property
     def intrinsic(self):
-        return self._equipped_skills['intrinseca']
+        return self._equipped_skills['intrinsic']
 
     @property
     def main1(self):
-        return self._equipped_skills['padrao1']
+        return self._equipped_skills['main1']
 
     @property
     def main2(self):
-        return self._equipped_skills['padrao2']
+        return self._equipped_skills['main2']
 
     @property
     def main3(self):
-        return self._equipped_skills['padrao3']
+        return self._equipped_skills['main3']
 
     @property
     def main4(self):
-        return self._equipped_skills['padrao4']
+        return self._equipped_skills['main4']
 
     @property
     def sup1(self):
-        return self._equipped_skills['suporte1']
+        return self._equipped_skills['sup1']
 
     @property
     def sup2(self):
-        return self._equipped_skills['suporte2']
+        return self._equipped_skills['sup2']
 
     @property
     def movement(self):
-        return self._equipped_skills['movimento']
+        return self._equipped_skills['mov']
 
     @property
     def reaction(self):
-        return self._equipped_skills['reacao']
+        return self._equipped_skills['reaction']
 
     @property
     def perfect(self):
-        return self._equipped_skills['perfeita']
+        return self._equipped_skills['perfect']
 
     def learn_skill(self, skill):
         self._available_skills.append(skill)
@@ -106,6 +116,9 @@ class CharSkills:
         for skill in self._available_skills:
             if skill.id_skill == skill_id:
                 self._equipped_skills[slot] = skill
+                return
+            else:
+                self._equipped_skills[slot] = ""
 
 
 
