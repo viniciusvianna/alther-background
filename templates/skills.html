@@ -1,0 +1,31 @@
+{% extends "template.html" %}
+{% block content %}
+    <main>
+        <div class="d-add-entry">
+            <form action="/add-skill" method="post" class="f-add-entry">
+                <label for="id-skill">ID Habilidade</label>
+                <input type="text" id="id-skill" placeholder="ARCITS">
+                <label for="id-path">Caminho</label>
+                <select id="id-path">
+                    {% for path in paths.items() %}
+                        <option value="{{ path[0] }}">{{ path[1] }}</option>
+                    {% endfor %}
+                </select>
+                <label for="name-skill">Nome</label>
+                <input type="text" id="name-skill" placeholder="Disparo">
+                <label for="category-skill">Categoria</label>
+                <select id="category-skill">
+                    {% for category in categories %}
+                        <option value="{{ category }}">{{ category }}</option>
+                    {% endfor %}
+                </select>
+                <label for="description-skill">Descrição</label>
+                <textarea id="description-skill" cols="70" rows="10" 
+                    placeholder="O efeito desta habilidade"></textarea>
+                <label for="cost-skill">Custo</label>
+                <input type="number" id="cost-skil" placeholder="0">
+                <input type="submit" value="Adicionar">
+            </form>
+        </div>
+    </main>
+{% endblock %}

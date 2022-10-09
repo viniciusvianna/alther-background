@@ -36,8 +36,34 @@
 }
 
 .h-welcome {
-    font-size: 24px;
+    font-size: large;
     font-weight: bold;
     text-align: center;
     margin-top: 15px;
+}
+
+/* Style for forms that add entries to the database */
+
+.d-add-entry {
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.f-add-entry {
+    margin: 40px 0;
+}
+
+.f-add-entry label {
+    display: block;
+    font-size: medium;
+    font-weight: bold;
+    margin: 0 0 10px;
+}
+
+.f-add-entry > input, select, textarea {
+    display: block;
+    margin: 0 0 20px;
+    padding: 10px 15px;
+    width: 50vw;
+    box-sizing: border-box;
 }
