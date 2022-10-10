@@ -1,3 +1,5 @@
+/* Style for template header and footer */
+
 .h-main {
     background: linear-gradient(black, #4d2c91) ;
     width: 100vw;
@@ -33,6 +35,13 @@
     color: white;
     font-weight: bold;
     text-decoration: none;
+    transition-duration: 0.5s;
+}
+
+.nav-m-main a:hover {
+    color: mediumslateblue;
+    text-decoration: underline;
+    font-weight: bold;
 }
 
 .h-welcome {
@@ -42,15 +51,99 @@
     margin-top: 15px;
 }
 
+.ft-main {    
+    background: linear-gradient(#0d47a1, black);
+    text-align: center;
+}
+
+.ft-box {
+   height: 10vh;
+   display: flex;
+   justify-content: center;
+   align-content: center;
+   flex-direction: column;
+}
+
+.ft-box h2 {
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    opacity: 80%;
+}
+
+.ft-box p {
+    color: white;
+    font-style: italic;
+    font-size: 16px;
+    opacity: 80%;
+}
+
+/* Style for the list of entries in the database */
+
+.d-list-entries {
+    width: 60vw;
+    height: fit-content;
+    max-height: 30vw;
+    margin: 20px auto;
+    overflow-y: auto;
+    display: block;
+    border: 1px solid;
+}
+
+.t-list-entries {
+    width: 100%;
+}
+
+.t-list-entries thead {
+    position: sticky;
+}
+
+.t-h-list-entries {
+    font-size: medium;
+    font-weight: bold;
+    background-color: #0d47a1;
+    color: white;  
+    text-align: center;  
+}
+
+.t-r-list-entries:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.t-h-list-entries th {
+    height: 20px;
+    vertical-align: center;
+    padding: 10px;
+}
+
+.t-r-list-entries td {
+    height: 20px;
+    text-align: center;
+    vertical-align: center;
+    padding: 10px;
+
+}
+
+.t-r-list-entries td a {
+    text-decoration: none;
+    transition-duration: 0.5s;
+    color:#0d47a1;
+}
+
+.t-r-list-entries td a:hover {
+    text-decoration: underline;
+    color: mediumslateblue;    
+}
+
 /* Style for forms that add entries to the database */
 
-.d-add-entry {
+.d-add-entry, .d-update-delete-entry {
     width: fit-content;
     margin: 0 auto;
 }
 
 .f-add-entry {
-    margin: 40px 0;
+    margin: 40px 0 0 0;
 }
 
 .f-add-entry label {
@@ -60,10 +153,29 @@
     margin: 0 0 10px;
 }
 
-.f-add-entry > input, select, textarea {
+.f-add-entry input, select, textarea {
     display: block;
     margin: 0 0 20px;
     padding: 10px 15px;
     width: 50vw;
     box-sizing: border-box;
+}
+
+.d-delete-entry button {
+    display: block;
+    border: none;
+    background-color: darkred;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px 15px;
+    margin: 20px 0 40px 0;
+    width: 50vw;
+    transition-duration: 0.5s;
+}
+
+.d-delete-entry button:hover {
+    background-color: red;
+    font-size: 18px;    
 }

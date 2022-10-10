@@ -1,0 +1,46 @@
+{% extends "template.html" %}
+{% block content %}
+<main>
+    <div class="d-update-delete-entry">
+        <form class="f-add-entry" action='/skills/update-skill' method="POST" >
+            <div class="d-update-entry">
+                <label for="id-skill">ID Habilidade</label>
+                <input type="text" id="id-skill" name="id_skill" value="{{ skill.id_skill }}">
+                <label for="id-path">Caminho</label>
+                <select id="id-path" name="id_path">
+                    {% for path in paths.items() %}
+                        {% if skill.id_path == path[0] %}
+                            <option value="{{ path[0] }}" selected>{{ path[1] }}</option>
+                        {% else %}
+                            <option value="{{ path[0] }}">{{ path[1] }}</option>
+                        {% endif %}                    
+                    {% endfor %}
+                </select>
+                <label for="name-skill">Nome</label>
+                <input type="text" id="name-skill" name="name_skill" value="{{ skill.name }}">
+                <label for="category-skill">Categoria</label>
+                <select id="category-skill" name="category">
+                    {% for category in categories %}
+                        {% if skill.category == category %}
+                            <option value="{{ category }}" selected>{{ category }}</option>
+                        {% else %}
+                            <option value="{{ category }}">{{ category }}</option>   
+                        {% endif %}                 
+                    {% endfor %}
+                </select>
+                <label for="description-skill">Descrição</label>
+                <textarea id="description-skill" 
+                    name="description" cols="70" rows="10">{{ skill.description }}</textarea>
+                <label for="cost-skill">Custo</label>
+                <input type="number" id="cost-skil" name="cost" value="{{ skill.cost }}">
+                <input type="submit" value="Atualizar">
+            </div>
+        </form>
+        <div class="d-delete-entry">
+            <form class="f-delete-entry" action="/skills/delete-skill" method="POST">
+                <button type="submit" name="delete" value="{{ skill.id_skill }}">Deletar</button>
+            </form>
+        </div>        
+    </div>
+</main>
+{% endblock %}

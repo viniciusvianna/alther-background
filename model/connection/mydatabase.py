@@ -101,7 +101,7 @@ def get_all_characters():
 
 # Skills queries
 def get_all_skills():
-    query = "SELECT * FROM habilidades"
+    query = "SELECT * FROM habilidades ORDER BY nome_habilidade"
 
     connection = open_connection()
     cursor = create_cursor(connection)
@@ -177,5 +177,37 @@ def upload_new_skill(skill):
     close_connection(cursor, connection)
 
     print("Habilidade adicionada.")
+
+
+def update_skill(skill):
+    query = "UPDATE habilidades SET nome_habilidade = %s, categoria = %s, descricao = %s, custo = %s, id_caminho = %s " \
+            "WHERE id_habilidade = %s"
+    val = (skill.name, skill.category, skill.description, skill.cost, skill.id_path, skill.id_skill)
+
+    connection = open_connection()
+    cursor = create_cursor(connection)
+
+    cursor.execute(query, val)
+
+    connection.commit()
+    close_connection(cursor, connection)
+
+    print("Habilidade atualizada")
+
+
+def delete_skill(skill_id):
+    query = "DELETE FROM habilidades WHERE id_habilidade = %s"
+    val = (skill_id, )
+
+    connection = open_connection()
+    cursor = create_cursor(connection)
+
+    cursor.execute(query, val)
+
+    connection.commit()
+    close_connection(cursor, connection)
+
+    print("Habilidade excluída")
+
 
 
